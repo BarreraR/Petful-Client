@@ -1,0 +1,8 @@
+.cat-or-dog {
+  display: flex;
+}
+
+.cat, .dog {
+  padding: 10px;
+}
+
