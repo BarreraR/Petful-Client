@@ -1,34 +1,12 @@
-import React, { useContext, useEffect, useState} from 'react';
+import React, { useContext, useState} from 'react';
 import Context from '../ApiContext';
 
 export default function FosterHomes(){
-  const { addSelf, remove, removePerson, addName, person, people } = useContext(Context);
+  const { addSelf, addName, people } = useContext(Context);
   const [name, setName] = useState('');
-  const pComponent = people.map((person, i) => <li key={i}>{person}</li>);
-
-  function fiveSec(){
-    console.log(person, people[0])
-
-    if(people.length < 5){
-      addName('Mr. Anonymous');
-      return;
-    }
-
-    if(person !== people[0] ){
-      remove();
-      // removePerson();
-      // removePet();
-      return;
-    }
-  }
-
-  useEffect(()=>{
-    const interval = setInterval(()=>{
-      // handle removing from person queue
-      fiveSec();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [person, people]);
+  const [submitted, setSubmitted] = useState(false);
+  const pComponent = people.map((person, i) => 
+    <li key={i} style={{backgroundColor: name===person && 'yellow'}}>{person}</li>);
 
   function handleName(e){
     setName(e.target.value);
@@ -36,6 +14,7 @@ export default function FosterHomes(){
 
   function addPerson(e){
     e.preventDefault();
+    setSubmitted(true);
     addName(name);
     addSelf(name);
   }
@@ -45,11 +24,13 @@ export default function FosterHomes(){
       <ul>
         {pComponent}
       </ul>
-      <form onSubmit={(e)=>addPerson(e)}>
-        <label>Name: </label>
-        <input type='text' id='name' onChange={(e)=>handleName(e)}/>
-        <input type='submit' value='Add name'/>
-      </form>
+      { !submitted &&
+        <form onSubmit={(e)=>addPerson(e)}>
+          <label>Name: </label>
+          <input type='text' id='name' onChange={(e)=>handleName(e)}/>
+          <input type='submit' value='Add name'/>
+        </form>
+      }
     </div>
   );
 }

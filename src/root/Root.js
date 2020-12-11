@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Route } from "react-router-dom";
-import Description from "../components/Description";
-import PetInfo from "../components/PetInfo";
-import Context from "../ApiContext.jsx";
+import React, { useState, useEffect } from 'react';
+import { Route } from 'react-router-dom';
+import Description from '../components/Description';
+import PetInfo from '../components/PetInfo';
+import Context from '../ApiContext.jsx';
 
 function Root() {
   const [people, setPeople] = useState([]);
@@ -56,9 +56,17 @@ function Root() {
     setPerson(name);
   }  
 
-  function remove(){
-    const pet = Math.floor(Math.random() * 2)? 'cats':'dogs';
-    console.log(pet);
+  function remove(type = null){
+    let pet;
+    if(type) pet = type; 
+    else {
+      const c = Object.keys(cat).length;
+      const d = Object.keys(dog).length;
+      pet = Math.floor(Math.random() * 2) ? 'cats':'dogs';
+      if(c === 0 && d === 0) return;
+      if(c === 0) pet = 'dogs';
+      if(d === 0) pet = 'cats';
+    }
 
     Promise.all([
       fetch(`http://localhost:8000/people`, {
@@ -82,35 +90,19 @@ function Root() {
           petRes.json(),
         ])
       })
-      .then(([personRes, petRes]) => {
-        console.log(personRes, petRes);
+      .then(([petRes]) => {
         setPeople(people.slice(1));
-        pet? setCat(petRes): setDog(petRes);
+        pet === 'cats'? setCat(petRes): setDog(petRes);
       })
       .catch(e=> console.error(e));
   } 
   
-  function removePerson(){
-    fetch('http://localhost:8000/people', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    .then(() => {
-      setPeople(people.slice(1));
-      // console.log(people);
-    })
-    .catch(e=>console.error(e));
-  }
-
   const value = {
     people,
     cat,
     dog,
     person,
     addName,
-    removePerson,
     remove,
     addSelf,
   }
@@ -118,8 +110,8 @@ function Root() {
     <Context.Provider value={value}>
       <div>
         <h1>Petful</h1>
-        <Route exact path="/" component={Description} />
-        <Route exact path="/pets" component={PetInfo} />
+        <Route exact path='/' component={Description} />
+        <Route exact path='/pets' component={PetInfo} />
       </div>
     </Context.Provider>
   );
