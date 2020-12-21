@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import Description from '../components/Description';
 import PetInfo from '../components/PetInfo';
 import Context from '../ApiContext.jsx';
+import './Root.css';
 
 function Root() {
   const [people, setPeople] = useState([]);

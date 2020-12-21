@@ -1,0 +1,17 @@
+h1 {
+  height: 3vh;
+  text-align: center;
+  background-color: burlywood;
+  margin: auto;
+  padding: 5vh;
+  margin-bottom: 2vh;
+  max-width: 800px;
+}
+
+body {
+  margin: 0;
+  padding: 2vh;
+  height: 96vh;
+  background-color: bisque;
+
+}

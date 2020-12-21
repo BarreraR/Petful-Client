@@ -1,8 +1,36 @@
 .cat-or-dog {
   display: flex;
+  flex-direction: column;
 }
 
 .cat, .dog {
   padding: 10px;
+  flex: 1;
 }
 
+.Pet__Info {
+  text-align: center;
+  background-color: burlywood;
+  padding: 5vh;
+  max-width: 800px;
+  margin: auto;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.Congratulations {
+  color: red;
+}
+
+h2{
+  margin-bottom: 10px;
+}
+
+@media all and (min-width: 500px){
+  .cat-or-dog{
+    flex-direction: row;
+  }
+}
