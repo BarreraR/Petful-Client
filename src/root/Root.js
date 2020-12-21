@@ -3,7 +3,9 @@ import { Route } from 'react-router-dom';
 import Description from '../components/Description';
 import PetInfo from '../components/PetInfo';
 import Context from '../ApiContext.jsx';
+import config from '../config';
 import './Root.css';
+
 
 function Root() {
   const [people, setPeople] = useState([]);
@@ -13,9 +15,9 @@ function Root() {
 
   useEffect(() => {
     Promise.all([
-      fetch(`http://localhost:8000/people`),
-      fetch(`http://localhost:8000/pets/dogs`),
-      fetch(`http://localhost:8000/pets/cats`),
+      fetch(`${config.API_ENDPOINT}/people`),
+      fetch(`${config.API_ENDPOINT}/pets/dogs`),
+      fetch(`${config.API_ENDPOINT}/pets/cats`),
     ])
       .then(([peopleRes, dogRes, catRes]) => {
         if(!peopleRes.ok)
@@ -40,7 +42,7 @@ function Root() {
   }, []);
 
   function addName(name){
-    fetch('http://localhost:8000/people', {
+    fetch(`${config.API_ENDPOINT}/people`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -70,13 +72,13 @@ function Root() {
     }
 
     Promise.all([
-      fetch(`http://localhost:8000/people`, {
+      fetch(`${config.API_ENDPOINT}/people`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
         },
       }),
-      fetch(`http://localhost:8000/pets/${pet}`, {
+      fetch(`${config.API_ENDPOINT}/${pet}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
