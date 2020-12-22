@@ -78,7 +78,7 @@ function Root() {
           'Content-Type': 'application/json'
         },
       }),
-      fetch(`${config.API_ENDPOINT}/${pet}`, {
+      fetch(`${config.API_ENDPOINT}/pets/${pet}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
