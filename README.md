@@ -2,6 +2,10 @@
 
 [Live App](https://rb-petful.vercel.app/)
 
+[Client Repo](https://github.com/BarreraR/Petful-Client)
+
+[Server Repo](https://github.com/BarreraR/Petful-Server)
+
 ## Stack Used
 
 ReactJS, CSS, HTML
