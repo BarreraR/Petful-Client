@@ -10,6 +10,10 @@
 
 ReactJS, CSS, HTML
 
+## Summary
+
+Connects to an API to get pets up for adoption in a FIFO structure. 
+
 ## Screenshots
 
 Home page displays description of adoption process.
